@@ -1,0 +1,18 @@
+{
+	"name": "assignment-1",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "cls && tsc app/index.ts -outDir out && node out/index.js",
+		"compile": "cls && webpack"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"ts-loader": "^9.5.1",
+		"webpack": "^5.90.3",
+		"webpack-cli": "^5.1.4"
+	}
+}
