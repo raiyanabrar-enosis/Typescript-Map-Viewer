@@ -4,8 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "cls && tsc app/index.ts -outDir out && node out/index.js",
-		"compile": "cls && webpack"
+		"compile": "cls && tsc && webpack"
 	},
 	"keywords": [],
 	"author": "",

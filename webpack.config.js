@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
 	mode: "development",
-	entry: "./app/index.ts", // Entry point for your application
+	entry: "./out/app/index.js", // Entry point for your application
 	output: {
 		filename: "bundle.js", // Output filename for the bundled JavaScript
 		path: path.resolve(__dirname, "out"), // Output directory for the bundled files

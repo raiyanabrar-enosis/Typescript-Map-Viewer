@@ -1,8 +1,11 @@
-import { Company, Location, User } from "./types/types";
+import { Company } from "./types/Company";
+import { Location } from "./types/Location";
+import { User } from "./types/User";
+import { companyIcon, userIcon } from "./icons";
 
 // @ts-ignore
-var map = L.map("map");
-var mapDialog = document.getElementById("mapInfo") as HTMLDialogElement;
+let map = L.map("map");
+let mapDialog = document.getElementById("mapInfo") as HTMLDialogElement;
 
 export function setupMap(companies: Company[], users: User[]) {
 	// @ts-ignore
@@ -57,41 +60,32 @@ function mapFlyView(location: Location, zoom = 8) {
 	});
 }
 
+function createMarker(item: User | Company, icon: any) {
+	// @ts-ignore
+	return L.marker([item.location.lattitude, item.location.longitude], {
+		icon: icon,
+		title: item.name,
+		riseOnHover: true,
+		autoPanOnFocus: true,
+	});
+}
+
 function addCompaniesToMap(companies: Company[]) {
 	for (let index = 0; index < companies.length; index++) {
 		const company = companies[index];
-
-		// @ts-ignore
-		var companyIcon = L.icon({
-			iconUrl: "https://i.imgur.com/QEBEeOP.png",
-
-			iconSize: [28, 28],
-			iconAnchor: [14, 14],
-		});
-
-		// @ts-ignore
-		L.marker([company.location.lattitude, company.location.longitude], {
-			icon: companyIcon,
-			title: company.name,
-			riseOnHover: true,
-			autoPanOnFocus: true,
-		})
-			.addTo(map)
-			.on("click", (e: Event) => showMapView(company));
+		putMarkerToMap(company, companyIcon);
 	}
 }
 
 function addUsersToMap(users: User[]) {
 	for (let index = 0; index < users.length; index++) {
 		const user = users[index];
-
-		// @ts-ignore
-		L.marker([user.location.lattitude, user.location.longitude], {
-			title: user.name,
-			riseOnHover: true,
-			autoPanOnFocus: true,
-		})
-			.addTo(map)
-			.on("click", (e: Event) => showMapView(user));
+		putMarkerToMap(user, userIcon);
 	}
+}
+
+function putMarkerToMap(item: User | Company, icon: any) {
+	createMarker(item, icon)
+		.addTo(map)
+		.on("click", (e: Event) => showMapView(item));
 }
